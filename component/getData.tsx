@@ -2,26 +2,29 @@ import { client } from "@/component/services/axois";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
-import image from '@/public/image.png';
-import Image from "next/image";
 import LoadingPosts from "./loading/loadingPosts";
+import { Button, Flex, Card, Col, Space } from 'antd';
 
-
-export const GetDataFun=()=> {
+export const GetDataFun = () => {
     // router
-    const router:AppRouterInstance = useRouter();
+    const router: AppRouterInstance = useRouter();
     // state
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState([{}]);
     const [loading, setLoading] = useState(false);
 
     // get data
     const getData = async () => {
         // sleep(5000)
-        const { data }: any = await client.get('/posts');
-        setPosts(data);
-        setLoading(true)
+        // const { data }: any = await client.get('/posts');
+        try {
+            const data = await fetch('https://jsonplaceholder.typicode.com/posts', { cache: "force-cache" }).then(res => { return res.json() })
+            setPosts(data);
+            setLoading(true)
+        } catch (error) {
+
+        }
     }
-    
+
     // Received at data load time
     useEffect(() => {
         const fetch = async () => {
@@ -36,22 +39,24 @@ export const GetDataFun=()=> {
     }
 
     return (
-        <div className="d-flex flex-wrap">
-                {posts.map((index: any) => (
-                    <div className="card text-bg-warning m-3" key={index.id} style={{ "width": '18rem' }}>
-                        <div className="image-card">
-                            <Image className="w-100" height={250} src={image} alt="image 1" />
-                        </div>
-                        <div className="card-header">{index.title}</div>
-                        <div className="card-body">
-                            <h5 className="card-title">Warning card title</h5>
-                            <p className="card-text">{index.body}</p>
-                        </div>
-                        <button className="btn btn-success" onClick={() => {localStorage.setItem('postId',JSON.stringify(index.id)); return router.push(`/posts/${index.id}`)}}>
-                            read more
-                        </button>
-                    </div>
-                ))}
-            </div>
+        <>
+            <Flex wrap gap="large" justify={'space-evenly'} align={'start'}>
+                {
+                    posts.map((index: any) => (
+                        <Col span={7} key={index.id}>
+                            <Card size="small" title={index.title} bordered={false}>
+                                {index.body}
+                                <br /><br />
+                                <Space size={[8, 16]} wrap>
+                                    <Button onClick={() => { localStorage.setItem('postId', JSON.stringify(index.id)); return router.push(`/posts/${index.id}`) }}>
+                                        read more
+                                    </Button>
+                                </Space>
+                            </Card>
+                        </Col>
+                    ))
+                }
+            </Flex>
+        </>
     )
 } 

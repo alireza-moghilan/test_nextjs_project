@@ -3,10 +3,14 @@
 import { client } from "@/component/services/axois";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Card, Avatar, Col, Button, Space } from "antd";
 
 // css
 import style from './style.module.scss'
 import LoadingPostId from "@/component/loading/loadingPostId";
+
+// meta
+const { Meta } = Card;
 
 export default function PostId({ params }: any) {
     // router
@@ -19,17 +23,17 @@ export default function PostId({ params }: any) {
     // get Data
     const getData = async () => {
         const { data }: any = await client.get('/posts');
-            setPosts(data);
-            setLoading(true)
+        setPosts(data);
+        setLoading(true)
     }
-    
+
     // 
     useEffect(() => {
         router.push(Number(localStorage.getItem('postId') || +1).toString() || '0');
-            const fetch = async () => {
-                return await getData()
-            }
-            fetch();
+        const fetch = async () => {
+            return await getData()
+        }
+        fetch();
     }, [])
 
     // loading ...
@@ -43,21 +47,31 @@ export default function PostId({ params }: any) {
             {posts.map((index: any) => {
                 if (id == index.id) {
                     return (
-                        <div className="card text-bg-warning m-3" key={index.id} style={{ "width": '50rem' }}>
-                            <div className="card-header">id Post : {index.id}</div>
-                            <div className="card-body">
-                                <h5 className="card-title">{index.title}</h5>
-                                <p className="card-text">{index.body}</p>
-                            </div>
-                            <button className="btn btn-success m-3" onClick={() => {
-                                if (id<posts.length) {
-                                    localStorage.setItem('postId', JSON.stringify(id + 1)); return setId(1 + id);
-                                }
-                            }
-                            }
-                            >next Post</button>
-                            <button className="btn btn-success m-3 mt-0" onClick={() => { return id > 1 ? (setId(id - 1),localStorage.setItem('postId', JSON.stringify(id - 1))) : router.push('1') }}>prive Post</button>
-                        </div>
+
+                        <Col span={12} key={index.id}>
+                            <Card size="small"
+                                title={index.title}
+                                bordered={true}
+                            >
+                                <h3 className="pColor">id Post : {index.id}</h3>
+                                <p>{index.body}</p>
+
+                                <Space style={{margin:'16px 8px'}} size={[8, 8]} wrap>
+
+                                    <Button onClick={() => { return id > 1 ? (setId(id - 1), localStorage.setItem('postId', JSON.stringify(id - 1))) : router.push('1') }}>prive Post</Button>
+                                </Space>
+                                <Space style={{margin:'16px 8px'}} size={[8, 8]} wrap>
+
+                                    <Button onClick={() => {
+                                        if (id < posts.length) {
+                                            localStorage.setItem('postId', JSON.stringify(id + 1)); return setId(1 + id);
+                                        }
+                                    }
+                                    }
+                                    >next Post</Button>
+                                </Space>
+                            </Card>
+                        </Col>
                     )
                 }
             })}
