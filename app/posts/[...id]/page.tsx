@@ -20,16 +20,20 @@ export default function PostId({ params }: any) {
     const [loading, setLoading] = useState(false)
     const [id, setId] = useState(Number(params.id))
 
-    // get Data
+    // get Posts
     const getData = async () => {
-        const { data }: any = await client.get('/posts');
+        // Getting data with the axios method
+        // const { data }: any = await client.get('/posts');
+        const data = await fetch('https://jsonplaceholder.typicode.com/posts', { cache: "force-cache" }).then(res => { return res.json() });
         setPosts(data);
         setLoading(true)
     }
 
-    // 
+    // useEffect => getdata and set postId on the router
     useEffect(() => {
+        // set postId on the router
         router.push(Number(localStorage.getItem('postId') || +1).toString() || '0');
+        // Get on page load time
         const fetch = async () => {
             return await getData()
         }
@@ -57,12 +61,12 @@ export default function PostId({ params }: any) {
                                 <p>{index.body}</p>
 
                                 <Space style={{margin:'16px 8px'}} size={[8, 8]} wrap>
-
-                                    <Button onClick={() => { return id > 1 ? (setId(id - 1), localStorage.setItem('postId', JSON.stringify(id - 1))) : router.push('1') }}>prive Post</Button>
+                                    {/* btn => prive Post */}
+                                    <Button disabled={id<=1?true:false} onClick={() => { return id > 1 ? (setId(id - 1), localStorage.setItem('postId', JSON.stringify(id - 1))) : router.push('1') }}>prive Post</Button>
                                 </Space>
                                 <Space style={{margin:'16px 8px'}} size={[8, 8]} wrap>
-
-                                    <Button onClick={() => {
+                                    {/* btn => next post */}
+                                    <Button disabled={id>=posts.length?true:false} onClick={() => {
                                         if (id < posts.length) {
                                             localStorage.setItem('postId', JSON.stringify(id + 1)); return setId(1 + id);
                                         }
