@@ -5,6 +5,26 @@ html,body {
     padding: 1rem 3rem;
 }
 
+@media (max-width:620px) {
+    html,body {
+        padding: 0 0.8rem !important;
+
+        .h-card {
+            height: 100%;
+        }
+    }
+}
+
+@media (min-width:767.98px) {
+    html,body {
+        padding: 0 0.8rem !important;
+
+        .h-card {
+            height: 250px;
+        }
+    }
+}
+
 .pColor,.ant-card-head-title {
     color: $blue-8;
 }

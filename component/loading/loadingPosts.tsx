@@ -1,14 +1,14 @@
 // import
-import { Button, Flex, Card, Avatar, Col } from "antd"
+import { Row, Card, Avatar, Col } from "antd"
 const { Meta } = Card;
 // load all posts
 export default function LoadingPosts() {
     return (
         <>
 
-            <Flex wrap gap="large" justify={'space-evenly'} align={'start'}>
+            <Row gutter={[24, 24]}>
                 {Array.from({ length: 24 }, (_, i) => (
-                    <Col span={7}>
+                    <Col xl={{span:6}} lg={{ span: 8 }} md={{ span: 12 }} xs={{span:24}}>
                         <Card size="small"
                             loading={true}
                         >
@@ -20,7 +20,7 @@ export default function LoadingPosts() {
                         </Card>
                     </Col>
                 ))}
-            </Flex>
+            </Row>
         </>
     )
 }

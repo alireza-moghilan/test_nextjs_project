@@ -21,7 +21,6 @@ export const GetPostsComponent = () => {
         });
     const [btnClick, setBtnClick] = useState(0);
 
-    // interFace
     interface PostsKey {
         id: number,
         title: string,
@@ -93,7 +92,7 @@ export const GetPostsComponent = () => {
     // card antd
     const card = (id: number, title: string, body: string) => {
         return (
-            <Col className="h-100" lg={{ span: 8 }} md={{ span: 12 }}>
+            <Col className="h-100" xl={{span:6}} lg={{ span: 8 }} md={{ span: 12 }} xs={{span:24}}>
                 <Card className="h-card" size="small" title={title} bordered={false}>
                     {body}
                     <br /><br />
@@ -107,8 +106,6 @@ export const GetPostsComponent = () => {
         )
     }
 
-
-    // 
     const addPosts = (startShowingPosts: number, endShowingPosts: number) => {
         return (
             posts.map((items: PostsKey) => (

@@ -54,7 +54,7 @@ export default function PostId({ params }: any) {
         <>
             <h1 className={style.h1Color}>data:{id}</h1>
 
-            <Col span={12} key={posts?.id}>
+            <Col xxl={{span:12}} xl={{span:24}} lg={{ span: 24 }} md={{ span: 24 }} xs={{span:24}} key={posts?.id}>
                 <Card size="small"
                     title={posts?.title}
                     bordered={true}
