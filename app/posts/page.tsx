@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import { GetPostsComponent } from "@/component/getPosts";
+
 export default function Posts() {
     return (
         <>
