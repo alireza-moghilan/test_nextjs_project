@@ -1,0 +1,33 @@
+@import "./color.scss";
+
+html,body {
+    background-color: #ccc;
+    padding: 1rem 3rem;
+}
+
+.pColor,.ant-card-head-title {
+    color: $blue-8;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.h-card {
+    height: 200px;
+}
+
+.btn-place {
+    position: absolute !important;
+    bottom: 18px;
+}
+
+.viewDataBtn {
+    margin: 4rem auto;
+    display: flex !important;
+    padding:1.5rem 3rem !important;
+}

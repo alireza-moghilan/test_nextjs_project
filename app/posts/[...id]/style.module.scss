@@ -1,5 +1,9 @@
-$blue-8:#003eb3;
+@import "../../../color.scss";
 
 .h1Color {
     color: $blue-8 !important;
+}
+
+.spaceBtn {
+    margin: 16px 8px !important;
 }
