@@ -1,5 +1,5 @@
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import "@/styles.scss";
+import "@/styles/styles.scss";
 // import google Font
 import { Josefin_Sans } from 'next/font/google';
 import { ConfigProvider } from "antd";

@@ -64,11 +64,11 @@ export default function PostId({ params }: any) {
 
                     <Space className={style.spaceBtn} size={[8, 8]} wrap>
                         {/* btn => prive Post */}
-                        <Button disabled={id <= 1 ? true : false} onClick={() => router.push(Number(--params.id).toString())}>prive Post</Button>
+                        <Button disabled={id <= 1} onClick={() => router.push(Number(--params.id).toString())}>prive Post</Button>
                     </Space>
                     <Space className={style.spaceBtn} size={[8, 8]} wrap>
                         {/* btn => next post */}
-                        <Button disabled={id === lenOfPosts ? true : false} onClick={() => router.push(Number(++params.id).toString())}
+                        <Button disabled={id === lenOfPosts} onClick={() => router.push(Number(++params.id).toString())}
                         >next Post</Button>
                     </Space>
                 </Card>
