@@ -6,8 +6,8 @@ import { Button, Card, Col, Space, Row } from 'antd';
 import { toast } from "react-toastify";
 
 export const GetPostsComponent = () => {
-    // router
     const router: AppRouterInstance = useRouter();
+    
     // state
     const [posts, setPosts] = useState<PostsKey[]>([]);
     const [loading, setLoading] = useState(false);
